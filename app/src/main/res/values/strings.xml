@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MovieProject</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="agents">Agents</string>
+    <string name="maps">Maps</string>
+    <string name="weapons">Weapons</string>
+    <string name="tiers">Tiers</string>
+    <string name="description">Description</string>
+    <string name="special_abilities">Special Abilities</string>
+    <string name="damage_range">Damage Range</string>
+    <string name="skins">Skins</string>
+
+    <string name="head_damage">Head - %.1f</string>
+    <string name="body_damage">Body - %1d</string>
+    <string name="leg_damage">Body - %.1f</string>
+
+</resources>
