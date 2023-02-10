@@ -10,18 +10,20 @@ data class PopularDetails (
     var homepage: String  ?= "",
     var id: String = "",
     var imdb_id: String  ?= "",
-    var original_language: String  ?= "" ,
-    var original_title: String  ?= "" ,
+    var original_language: String  ?= "",
+    var original_title: String  ?= "",
     var overview: String  ?= "",
     var poster_path: String  ?= "",
     var production_companies: List<ProductionCompany> ?= arrayListOf(),
     var production_countries: List<ProductionCountry> ?= arrayListOf(),
     var release_date: String  ?= "",
-
     var spoken_languages: List<SpokenLanguage> ?= arrayListOf(),
     var status: String  ?= "",
     var tagline: String  ?= "",
     var title: String  ?= "",
+    val video: Boolean ?= false,
+    var vote_average: Double ?= 0.0,
+    val vote_count: Int ?=0
 
 )
 

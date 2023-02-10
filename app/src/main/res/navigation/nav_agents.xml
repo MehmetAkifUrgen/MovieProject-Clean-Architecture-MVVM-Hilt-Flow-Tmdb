@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_agent_detail" >
 
         <argument
-            android:name="uuid"
+            android:name="id"
             app:argType="string" />
     </fragment>
 </navigation>

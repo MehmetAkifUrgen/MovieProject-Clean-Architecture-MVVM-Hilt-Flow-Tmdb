@@ -18,8 +18,8 @@ class AgentDetailViewModel @Inject constructor(
     private val _agentDetailItem = MutableLiveData<PopularDetails>()
     val agentDetailItem : LiveData<PopularDetails> = _agentDetailItem
 
-    fun agentDetailRequest(uuid:String) {
-        agentDetailUseCase.popularId(uuid)
+    fun agentDetailRequest(id:String) {
+        agentDetailUseCase.popularId(id)
         agentDetailUseCase.execute(
             onSuccess = {
                 agentDetailMapper.mapOnAgentDetailResponse(it)

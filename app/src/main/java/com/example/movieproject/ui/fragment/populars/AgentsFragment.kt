@@ -1,6 +1,7 @@
 package com.example.movieproject.ui.fragment.populars
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.movieproject.R
@@ -27,8 +28,8 @@ class AgentsFragment : BaseFragment<FragmentAgentsBinding>() {
     private fun initAdapter(){
        viewModel.agentAdapterList.value?.let { adapterList->
             popularAdapter = PopularsAdapter(adapterList, itemClick = {
-                it.id?.let { uuid->
-                    findNavController().navigate(AgentsFragmentDirections.actionAgentsFragmentToAgentDetailFragment(uuid))
+                it.id?.let { id->
+                    findNavController().navigate(AgentsFragmentDirections.actionAgentsFragmentToAgentDetailFragment(id))
                 }
             })
             binding.apply {
@@ -42,8 +43,9 @@ class AgentsFragment : BaseFragment<FragmentAgentsBinding>() {
         }
         viewModel.upcomingAdapterList.value?.let { adapterList->
             upComingsAdapter = UpComingsAdapter(adapterList, itemClick = {
-                it.id?.let { uuid->
-                    findNavController().navigate(AgentsFragmentDirections.actionAgentsFragmentToAgentDetailFragment(uuid))
+                it.id?.let { id->
+                    Log.d("kk",id)
+                    findNavController().navigate(AgentsFragmentDirections.actionAgentsFragmentToAgentDetailFragment(id))
                 }
             })
             binding.apply {

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieproject.data.uimodel.populars.Popular
 import com.example.movieproject.data.uimodel.populars.PopularDetails
 import com.example.movieproject.databinding.ItemAgentLayoutBinding
+import com.example.movieproject.utils.Constants.imagePath
 import com.example.movieproject.utils.loadImage
 
 class PopularsAdapter(private val agentsAdapterList : ArrayList<Popular>, private val itemClick: (Popular) -> Unit):RecyclerView.Adapter<PopularsAdapter.AgentsViewHolder>() {
@@ -18,7 +19,7 @@ class PopularsAdapter(private val agentsAdapterList : ArrayList<Popular>, privat
     }
 
     override fun onBindViewHolder(holder: AgentsViewHolder, position: Int) {
-        val imagePath="https://image.tmdb.org/t/p/w500"
+
         holder.binding.apply {
             agentNameTextView.text = agentsAdapterList[position].title
             agentImageView.loadImage(imagePath+ agentsAdapterList[position].posterPath)
