@@ -2,7 +2,7 @@ package com.example.movieproject.data.uimodel.populars
 
 import com.example.movieproject.data.response.popular.*
 
-data class PopularDetails (
+data class PopularDetailsUiModel (
     var adult: Boolean  ?= false,
     var backdrop_path: String  ?= "",
     var budget: Int ?=0,

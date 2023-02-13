@@ -2,19 +2,19 @@ package com.example.movieproject.ui.mapper.populars
 
 
 import com.example.movieproject.data.response.popular.PopularDetailsResponse
-import com.example.movieproject.data.uimodel.populars.PopularDetails
+import com.example.movieproject.data.uimodel.populars.PopularDetailsUiModel
 import javax.inject.Inject
 
 open class PopularDetailMapper @Inject constructor() {
 
-    var agentDetailItem: PopularDetails? = null
+    var agentDetailItem: PopularDetailsUiModel? = null
 
     fun mapOnAgentDetailResponse(agentDetailResponse: PopularDetailsResponse) {
         addAgentDetailItem(agentDetailResponse)
     }
 
-    private fun agentDetailResponseConvertToModel(agentDetailResponseItem: PopularDetailsResponse): PopularDetails {
-        return PopularDetails().apply {
+    private fun agentDetailResponseConvertToModel(agentDetailResponseItem: PopularDetailsResponse): PopularDetailsUiModel {
+        return PopularDetailsUiModel().apply {
             agentDetailResponseItem.original_title.let { title -> this.original_title = title }
             agentDetailResponseItem.poster_path.let { poster_path -> this.poster_path = poster_path }
             agentDetailResponseItem.backdrop_path.let { backdrop_path -> this.backdrop_path = backdrop_path }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieproject.R
 import com.example.movieproject.base.BaseFragment
 import com.example.movieproject.databinding.FragmentAgentsBinding
@@ -66,4 +67,6 @@ class AgentsFragment : BaseFragment<FragmentAgentsBinding>() {
             initAdapter()
         }
     }
+
+
 }

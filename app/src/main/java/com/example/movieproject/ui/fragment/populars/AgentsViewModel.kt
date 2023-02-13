@@ -3,7 +3,7 @@ package com.example.movieproject.ui.fragment.populars
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movieproject.data.uimodel.populars.Popular
+import com.example.movieproject.data.uimodel.populars.PopularUiModel
 import com.example.movieproject.data.uimodel.upcoming.UpComingUiModel
 import com.example.movieproject.ui.mapper.populars.PopularsMapper
 import com.example.movieproject.data.usecase.populars.PopularsUseCase
@@ -20,8 +20,8 @@ class AgentsViewModel @Inject constructor(
     private val upComingsUseCase: UpComingsUseCase
 ) : ViewModel() {
 
-    private val _agentAdapterList = MutableLiveData<ArrayList<Popular>>()
-    val agentAdapterList : LiveData<ArrayList<Popular>> = _agentAdapterList
+    private val _agentAdapterList = MutableLiveData<ArrayList<PopularUiModel>>()
+    val agentAdapterList : LiveData<ArrayList<PopularUiModel>> = _agentAdapterList
 
     private val _upcomingAdapterList = MutableLiveData<ArrayList<UpComingUiModel>>()
     val upcomingAdapterList : LiveData<ArrayList<UpComingUiModel>> = _upcomingAdapterList

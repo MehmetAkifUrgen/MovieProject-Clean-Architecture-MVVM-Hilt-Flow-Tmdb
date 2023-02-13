@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 
 abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
 
@@ -31,4 +32,5 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
     }
 
     abstract fun prepareView(savedInstanceState: Bundle?)
+
 }

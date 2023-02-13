@@ -3,13 +3,12 @@ package com.example.movieproject.ui.adapter.populars
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movieproject.data.uimodel.populars.Popular
-import com.example.movieproject.data.uimodel.populars.PopularDetails
+import com.example.movieproject.data.uimodel.populars.PopularUiModel
 import com.example.movieproject.databinding.ItemAgentLayoutBinding
 import com.example.movieproject.utils.Constants.imagePath
 import com.example.movieproject.utils.loadImage
 
-class PopularsAdapter(private val agentsAdapterList : ArrayList<Popular>, private val itemClick: (Popular) -> Unit):RecyclerView.Adapter<PopularsAdapter.AgentsViewHolder>() {
+class PopularsAdapter(private val agentsAdapterList : ArrayList<PopularUiModel>, private val itemClick: (PopularUiModel) -> Unit):RecyclerView.Adapter<PopularsAdapter.AgentsViewHolder>() {
 
     class AgentsViewHolder(val binding: ItemAgentLayoutBinding):RecyclerView.ViewHolder(binding.root)
 

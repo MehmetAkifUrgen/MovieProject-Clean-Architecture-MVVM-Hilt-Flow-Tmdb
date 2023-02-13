@@ -5,15 +5,15 @@ import javax.inject.Inject
 
 open class PopularsMapper @Inject constructor() {
 
-    var agentsAdapterList = ArrayList<com.example.movieproject.data.uimodel.populars.Popular>()
+    var agentsAdapterList = ArrayList<com.example.movieproject.data.uimodel.populars.PopularUiModel>()
 
     fun mapOnAgentsResponse(agentsResponse: PopularResponse){
         agentsAdapterList.clear()
         addAgentsItem(agentsResponse)
     }
 
-    private fun agentsResponseConvertToModel(agentsResponseItem: com.example.movieproject.data.response.popular.Result): com.example.movieproject.data.uimodel.populars.Popular {
-        return com.example.movieproject.data.uimodel.populars.Popular().apply {
+    private fun agentsResponseConvertToModel(agentsResponseItem: com.example.movieproject.data.response.popular.Result): com.example.movieproject.data.uimodel.populars.PopularUiModel {
+        return com.example.movieproject.data.uimodel.populars.PopularUiModel().apply {
             agentsResponseItem.title.let { title-> this.title = title }
             agentsResponseItem.poster_path.let { image-> this.posterPath = image }
             agentsResponseItem.id.let { id-> this.id = id.toString() }
