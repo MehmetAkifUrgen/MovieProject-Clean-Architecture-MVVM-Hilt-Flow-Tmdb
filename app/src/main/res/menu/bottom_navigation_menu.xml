@@ -2,9 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_agents"
+        android:id="@+id/nav_movie"
         android:icon="@drawable/ic_baseline_movie"
-        android:title="@string/agents" />
+        android:title="@string/movie" />
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/search" />
 
 
 

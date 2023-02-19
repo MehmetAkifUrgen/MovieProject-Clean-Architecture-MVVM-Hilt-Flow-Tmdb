@@ -9,7 +9,7 @@
 
         <include
             android:id="@+id/agentDetailLayout"
-            layout="@layout/agent_detail_layout"
+            layout="@layout/movie_detail_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -4,22 +4,21 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieproject.R
 import com.example.movieproject.base.BaseFragment
-import com.example.movieproject.databinding.FragmentAgentsBinding
+import com.example.movieproject.databinding.FragmentMovieBinding
 import com.example.movieproject.ui.adapter.populars.PopularsAdapter
 import com.example.movieproject.ui.adapter.upcoming.UpComingsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AgentsFragment : BaseFragment<FragmentAgentsBinding>() {
+class MovieFragment : BaseFragment<FragmentMovieBinding>() {
 
     private lateinit var popularAdapter :PopularsAdapter
     private var upComingsAdapter: UpComingsAdapter? = null
-    private val viewModel : AgentsViewModel by viewModels()
+    private val viewModel : MovieViewModel by viewModels()
 
-    override fun getLayoutId(): Int = R.layout.fragment_agents
+    override fun getLayoutId(): Int = R.layout.fragment_movie
 
     override fun prepareView(savedInstanceState: Bundle?) {
         viewModel.agentsRequest()
@@ -30,7 +29,7 @@ class AgentsFragment : BaseFragment<FragmentAgentsBinding>() {
        viewModel.agentAdapterList.value?.let { adapterList->
             popularAdapter = PopularsAdapter(adapterList, itemClick = {
                 it.id?.let { id->
-                    findNavController().navigate(AgentsFragmentDirections.actionAgentsFragmentToAgentDetailFragment(id))
+                    findNavController().navigate(MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(id))
                 }
             })
             binding.apply {
@@ -46,7 +45,7 @@ class AgentsFragment : BaseFragment<FragmentAgentsBinding>() {
             upComingsAdapter = UpComingsAdapter(adapterList, itemClick = {
                 it.id?.let { id->
                     Log.d("kk",id)
-                    findNavController().navigate(AgentsFragmentDirections.actionAgentsFragmentToAgentDetailFragment(id))
+                    findNavController().navigate(MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(id))
                 }
             })
             binding.apply {

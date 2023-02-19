@@ -4,14 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movieproject.data.uimodel.cast.CastDetailUiModel
-import com.example.movieproject.data.uimodel.populars.PopularUiModel
-import com.example.movieproject.data.uimodel.upcoming.UpComingUiModel
+import com.example.movieproject.data.uimodel.cast.CrewDetailUiModel
 import com.example.movieproject.data.usecase.cast.CastUseCase
-import com.example.movieproject.ui.mapper.populars.PopularsMapper
-import com.example.movieproject.data.usecase.populars.PopularsUseCase
-import com.example.movieproject.data.usecase.upcoming.UpComingsUseCase
 import com.example.movieproject.ui.mapper.cast.CastMapper
-import com.example.movieproject.ui.mapper.upcoming.UpComingMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -22,7 +17,12 @@ class CastViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _castAdapterList = MutableLiveData<ArrayList<CastDetailUiModel>>()
+    private val _director = MutableLiveData<CrewDetailUiModel>()
+    private val _crewAdapterList = MutableLiveData<ArrayList<CrewDetailUiModel>>()
     val castAdapterList : LiveData<ArrayList<CastDetailUiModel>> = _castAdapterList
+    val crewAdapterList : LiveData<ArrayList<CrewDetailUiModel>> = _crewAdapterList
+    val director : LiveData<CrewDetailUiModel> = _director
+
 
     fun castRequest(id:String) {
         castUseCase.popularId(id)
@@ -30,7 +30,9 @@ class CastViewModel @Inject constructor(
             onSuccess = {
                 castMapper.mapOnCastResponse(it)
                 _castAdapterList.value = castMapper.castAdapterList
-
+                castMapper.mapOnCrewResponse(it)
+                _director.value=castMapper.director
+                _crewAdapterList.value=castMapper.crewData
             },
             onError = {
                 it.printStackTrace()

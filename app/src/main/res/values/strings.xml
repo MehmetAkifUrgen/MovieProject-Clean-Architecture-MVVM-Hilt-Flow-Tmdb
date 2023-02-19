@@ -20,5 +20,8 @@
     <string name="trailer">TRAILER</string>
     <string name="add">add</string>
     <string name="cast">CAST</string>
+    <string name="back">back</string>
+    <string name="movie">Movies</string>
+    <string name="search">Search</string>
 
 </resources>

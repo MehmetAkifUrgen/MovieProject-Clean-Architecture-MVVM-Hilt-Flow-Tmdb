@@ -13,7 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AgentsViewModel @Inject constructor(
+class MovieViewModel @Inject constructor(
     private val agentsUseCase: PopularsUseCase,
     private val agentsMapper: PopularsMapper,
     private val upComingMapper:UpComingMapper,

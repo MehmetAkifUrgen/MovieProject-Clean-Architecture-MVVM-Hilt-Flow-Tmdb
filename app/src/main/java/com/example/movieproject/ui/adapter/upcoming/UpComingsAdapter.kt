@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieproject.data.uimodel.upcoming.UpComingUiModel
-import com.example.movieproject.databinding.ItemAgentLayoutBinding
+import com.example.movieproject.databinding.ItemMovieLayoutBinding
 import com.example.movieproject.utils.loadImage
 
 class UpComingsAdapter(private val agentsAdapterList : ArrayList<UpComingUiModel>, private val itemClick: (UpComingUiModel) -> Unit):RecyclerView.Adapter<UpComingsAdapter.AgentsViewHolder>() {
 
-    class AgentsViewHolder(val binding: ItemAgentLayoutBinding):RecyclerView.ViewHolder(binding.root)
+    class AgentsViewHolder(val binding: ItemMovieLayoutBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgentsViewHolder {
-        val binding = ItemAgentLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemMovieLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return AgentsViewHolder(binding)
     }
 

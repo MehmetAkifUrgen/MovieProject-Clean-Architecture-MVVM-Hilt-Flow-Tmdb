@@ -30,7 +30,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
             when (destination.id) {
-                R.id.agentsFragment -> {
+                R.id.movieFragment -> {
+                    binding.bottomNavigationView.setVisible()
+                }
+                R.id.searchFragment -> {
                     binding.bottomNavigationView.setVisible()
                 }
 

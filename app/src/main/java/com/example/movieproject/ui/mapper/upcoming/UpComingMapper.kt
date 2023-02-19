@@ -1,6 +1,5 @@
 package com.example.movieproject.ui.mapper.upcoming
 
-import com.example.movieproject.data.response.popular.PopularResponse
 import com.example.movieproject.data.response.upcoming.UpComingResponse
 import com.example.movieproject.data.uimodel.upcoming.UpComingUiModel
 import javax.inject.Inject
