@@ -19,16 +19,16 @@ interface ServiceInterface {
     @GET("movie/upcoming?api_key=$api_key&language=en-US&page=1")
     fun getUpComing(): Single<UpComingResponse>
 
-    @GET("movie/{id}?api_key=$api_key&language=en-US")
+    @GET("movie/{id}?api_key=$api_key&language=tr-TR")
     fun getPopularDetails(@Path("id") id: String): Single<PopularDetailsResponse>
 
-    @GET("movie/{id}/credits?api_key=$api_key&language=en-US")
+    @GET("movie/{id}/credits?api_key=$api_key&language=tr-TR")
     fun getCast(@Path("id") id: String): Single<CastResponse>
 
     @GET("movie/{id}/watch/providers?api_key=$api_key")
     fun getWatch(@Path("id") id: String): Single<WatchResponse>
 
-    @GET("search/movie?api_key=$api_key&language=en-US&page=1&include_adult=true")
+    @GET("search/movie?api_key=$api_key&language=en-US&page=1&include_adult=false")
     fun searchMovie(@Query("query") search: String): Single<PopularResponse>
 
 }

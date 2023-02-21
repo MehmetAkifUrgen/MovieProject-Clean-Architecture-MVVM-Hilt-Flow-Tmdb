@@ -83,6 +83,8 @@ dependencies {
     // Android Util
     implementation "com.blankj:utilcodex:1.30.6"
 
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
     //Navigation
     def navigation = "2.5.3"
     implementation "androidx.navigation:navigation-runtime-ktx:$navigation"

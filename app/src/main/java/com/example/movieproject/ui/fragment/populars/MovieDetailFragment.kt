@@ -3,6 +3,7 @@ package com.example.movieproject.ui.fragment.populars
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -94,22 +95,29 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
     }
 
     private fun initAgentDetailItemObserve() {
-        viewModel.agentDetailItem.observe(viewLifecycleOwner) {
-            initUi(it)
-        }
-        castViewModel.castAdapterList.observe(viewLifecycleOwner) {
-            initCastAdapter(it)
-        }
-        castViewModel.director.observe(viewLifecycleOwner) {
-            crewUi(it)
-        }
-        castViewModel.crewAdapterList.observe(viewLifecycleOwner) {
-            initCrewdapter(it)
-        }
-        watchViewModel.pro.observe(viewLifecycleOwner) {
-            Log.d("klass", it.toString())
-            initProviderAdapter(it)
-        }
+
+       try {
+           viewModel.agentDetailItem.observe(viewLifecycleOwner) {
+               initUi(it)
+           }
+           castViewModel.castAdapterList.observe(viewLifecycleOwner) {
+               initCastAdapter(it)
+           }
+           castViewModel.director.observe(viewLifecycleOwner) {
+               crewUi(it)
+           }
+           castViewModel.crewAdapterList.observe(viewLifecycleOwner) {
+               initCrewdapter(it)
+           }
+           watchViewModel.pro.observe(viewLifecycleOwner) {
+               Log.d("klass", it.toString())
+               initProviderAdapter(it)
+           }
+       }
+       catch (e:Exception){
+           Toast.makeText(context,"$e",Toast.LENGTH_SHORT)
+       }
+
     }
 
     private fun initCastAdapter(castItem: ArrayList<CastDetailUiModel>) {

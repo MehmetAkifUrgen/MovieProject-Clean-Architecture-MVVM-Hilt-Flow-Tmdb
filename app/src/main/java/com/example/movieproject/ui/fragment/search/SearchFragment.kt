@@ -14,6 +14,7 @@ import com.example.movieproject.ui.adapter.populars.PopularsAdapter
 import com.example.movieproject.ui.adapter.searchMovie.SearchMovieAdapter
 import com.example.movieproject.ui.adapter.upcoming.UpComingsAdapter
 import com.example.movieproject.ui.fragment.populars.MovieFragmentDirections
+import com.google.android.flexbox.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,6 +47,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     findNavController().navigate(MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(uuid))
                 }
             })
+            val layoutManager = FlexboxLayoutManager(context).apply {
+                justifyContent = JustifyContent.SPACE_BETWEEN
+                alignItems = AlignItems.CENTER
+                flexDirection = FlexDirection.ROW
+                flexWrap = FlexWrap.WRAP
+            }
+            binding.searchRecyclerView.layoutManager=layoutManager
             binding.searchRecyclerView.adapter = searchAdapter
         }
     }
