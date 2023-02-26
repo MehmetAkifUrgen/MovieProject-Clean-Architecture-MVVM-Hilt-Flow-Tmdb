@@ -36,7 +36,7 @@ interface ServiceInterface {
     @GET("genre/movie/list?api_key=$api_key&language=en-US")
     fun getGenres() : Single<GenreResponse>
 
-    @GET("discover/movie?api_key=$api_key&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres={genre}")
-    fun getDiscover(@Path("genre") genre: String): Single<PopularResponse>
+    @GET("discover/movie?api_key=$api_key&language=en-US&sort_by=popularity.desc&include_adult=false&page=1")
+    fun getDiscover(@Query("with_genres") genre: String): Single<PopularResponse>
 
 }

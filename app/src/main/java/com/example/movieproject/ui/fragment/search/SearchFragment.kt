@@ -50,8 +50,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         binding.myDrawerButton.setOnClickListener {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START);
+
             } else {
                 drawerLayout.openDrawer(GravityCompat.START);
+
             }
         }
 
@@ -110,6 +112,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 it.id?.let { uuid ->
                     viewModel.discover(uuid)
                     observeDiscover()
+                    drawerLayout.closeDrawer(GravityCompat.START);
                 }
             })
             binding.genreRecyclerView.adapter = genreAdapter
