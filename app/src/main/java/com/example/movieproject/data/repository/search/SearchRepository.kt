@@ -1,4 +1,4 @@
-package com.example.movieproject.data.repository.popular
+package com.example.movieproject.data.repository.search
 
 import com.example.movieproject.data.response.genre.GenreResponse
 import com.example.movieproject.data.response.popular.PopularResponse
@@ -7,12 +7,8 @@ import com.example.movieproject.data.response.upcoming.UpComingResponse
 import com.example.movieproject.data.response.watch.WatchResponse
 import io.reactivex.rxjava3.core.Single
 
-interface PopularRepository {
-
-     fun getPopulars(): Single<PopularResponse>
-     fun getUpComing(): Single<UpComingResponse>
-     fun getWatch(id: String):Single<WatchResponse>
-
-
-     fun getPopularDetails(id: String): Single<PopularDetailsResponse>
+interface SearchRepository {
+     fun searchMovie(query:String):Single<PopularResponse>
+     fun getGenre():Single<GenreResponse>
+     fun getDiscover(genre:String):Single<PopularResponse>
 }

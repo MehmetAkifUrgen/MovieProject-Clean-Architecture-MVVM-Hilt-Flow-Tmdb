@@ -1,6 +1,8 @@
 package com.example.movieproject.data.api
 
 import com.example.movieproject.data.response.casting.CastResponse
+import com.example.movieproject.data.response.genre.GenreResponse
+import com.example.movieproject.data.response.popular.Genre
 import com.example.movieproject.data.response.popular.PopularResponse
 import com.example.movieproject.data.response.popular.PopularDetailsResponse
 import com.example.movieproject.data.response.upcoming.UpComingResponse
@@ -30,5 +32,11 @@ interface ServiceInterface {
 
     @GET("search/movie?api_key=$api_key&language=en-US&page=1&include_adult=false")
     fun searchMovie(@Query("query") search: String): Single<PopularResponse>
+
+    @GET("genre/movie/list?api_key=$api_key&language=en-US")
+    fun getGenres() : Single<GenreResponse>
+
+    @GET("discover/movie?api_key=$api_key&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres={genre}")
+    fun getDiscover(@Path("genre") genre: String): Single<PopularResponse>
 
 }

@@ -4,6 +4,7 @@
     tools:context=".ui.fragment.agents.AgentDetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

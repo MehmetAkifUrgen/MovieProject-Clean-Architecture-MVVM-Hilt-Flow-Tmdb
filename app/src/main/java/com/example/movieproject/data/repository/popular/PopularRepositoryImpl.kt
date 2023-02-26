@@ -1,6 +1,7 @@
 package com.example.movieproject.data.repository.popular
 
 import com.example.movieproject.data.api.ServiceInterface
+import com.example.movieproject.data.response.genre.GenreResponse
 import com.example.movieproject.data.response.popular.PopularResponse
 import com.example.movieproject.data.response.popular.PopularDetailsResponse
 import com.example.movieproject.data.response.upcoming.UpComingResponse
@@ -19,10 +20,6 @@ class PopularRepositoryImpl(private val serviceInterface: ServiceInterface) : Po
 
     override fun getWatch(id: String): Single<WatchResponse> {
         return serviceInterface.getWatch(id)
-    }
-
-    override fun searchMovie(query: String): Single<PopularResponse> {
-        return serviceInterface.searchMovie(query)
     }
 
     override fun getPopularDetails(id: String): Single<PopularDetailsResponse> {

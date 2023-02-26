@@ -9,46 +9,88 @@
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <EditText
-            android:id="@+id/search_view"
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:background="@color/background"
+            android:id="@+id/my_drawer_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            android:drawableRight="@drawable/ic_baseline_search_24"
-            android:hint="Search"
-            android:minHeight="48dp"
-            android:padding="4sp"
-            android:text="@={myViewModel.editTextValue}"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
 
-       <LinearLayout
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/search_view"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="150dp"
+                android:paddingBottom="20dp"
+                android:background="@color/background"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|start">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/genre_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                tools:listitem="@layout/genre_item" />
+            </androidx.core.widget.NestedScrollView>
 
-           <androidx.recyclerview.widget.RecyclerView
-               android:id="@+id/searchRecyclerView"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_horizontal"
-               android:layout_marginHorizontal="8sp"
-               android:clipToPadding="false"
-               android:orientation="vertical"
-               app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-               app:spanCount="2"
-               tools:ignore="RtlSymmetry"
-               tools:listitem="@layout/item_movie_layout" />
-       </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:orientation="horizontal">
+                  <androidx.appcompat.widget.AppCompatImageButton
+                      android:layout_margin="8sp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/my_drawer_button"
+                      android:src="@drawable/ic_baseline_menu_24"/>
+                  <EditText
+                      android:id="@+id/search_view"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="8sp"
+                      android:drawableRight="@drawable/ic_baseline_search_24"
+                      android:hint="Search"
+                      android:minHeight="48dp"
+                      android:padding="4sp"
+                      android:text="@={myViewModel.editTextValue}"
+                      android:textColor="@color/white"
+                      android:textSize="16sp" />
+              </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/searchRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="8sp"
+                        android:clipToPadding="false"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="2"
+                        tools:ignore="RtlSymmetry"
+                        tools:listitem="@layout/item_movie_layout" />
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+        </androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+
+
+
 </layout>
