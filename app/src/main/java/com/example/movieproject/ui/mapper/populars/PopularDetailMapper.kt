@@ -7,42 +7,28 @@ import javax.inject.Inject
 
 open class PopularDetailMapper @Inject constructor() {
 
-    var agentDetailItem: PopularDetailsUiModel? = null
+    var popularDetailItem: PopularDetailsUiModel? = null
 
-    fun mapOnAgentDetailResponse(agentDetailResponse: PopularDetailsResponse) {
-        addAgentDetailItem(agentDetailResponse)
+    fun mapOnPopularDetailResponse(popularDetailResponse: PopularDetailsResponse) {
+        addPopularDetailItem(popularDetailResponse)
     }
 
-    private fun agentDetailResponseConvertToModel(agentDetailResponseItem: PopularDetailsResponse): PopularDetailsUiModel {
+    private fun popularDetailResponseConvertToModel(popularDetailResponseItem: PopularDetailsResponse): PopularDetailsUiModel {
         return PopularDetailsUiModel().apply {
-            agentDetailResponseItem.original_title.let { title -> this.original_title = title }
-            agentDetailResponseItem.poster_path.let { poster_path -> this.poster_path = poster_path }
-            agentDetailResponseItem.backdrop_path.let { backdrop_path -> this.backdrop_path = backdrop_path }
-            agentDetailResponseItem.release_date.let { release_date -> this.release_date = release_date }
-            agentDetailResponseItem.vote_average.let { vote_average -> this.vote_average = vote_average }
-            agentDetailResponseItem.overview.let { overview -> this.overview = overview }
-            agentDetailResponseItem.id.let { id -> this.id = id.toString() }
-          //  abilities = abilityListConvertToModel(agentDetailResponseItem)
+            popularDetailResponseItem.original_title.let { title -> this.original_title = title }
+            popularDetailResponseItem.poster_path.let { poster_path -> this.poster_path = poster_path }
+            popularDetailResponseItem.backdrop_path.let { backdrop_path -> this.backdrop_path = backdrop_path }
+            popularDetailResponseItem.release_date.let { release_date -> this.release_date = release_date }
+            popularDetailResponseItem.vote_average.let { vote_average -> this.vote_average = vote_average }
+            popularDetailResponseItem.overview.let { overview -> this.overview = overview }
+            popularDetailResponseItem.id.let { id -> this.id = id.toString() }
         }
     }
 
-    private fun addAgentDetailItem(agentDetailResponse: PopularDetailsResponse) {
-        agentDetailResponse.let { response ->
-            agentDetailItem = agentDetailResponseConvertToModel(response)
+    private fun addPopularDetailItem(popularDetailResponse: PopularDetailsResponse) {
+        popularDetailResponse.let { response ->
+            popularDetailItem = popularDetailResponseConvertToModel(response)
         }
     }
 
-   /* private fun abilityListConvertToModel(agentDetailResponseItem: AgentsResponseItem): ArrayList<AbilityItem> {
-        val abilityList = arrayListOf<AbilityItem>()
-        agentDetailResponseItem.abilities?.forEach { ability ->
-            abilityList.add(
-                AbilityItem(
-                    ability.description,
-                    ability.displayIcon,
-                    ability.displayName,
-                )
-            )
-        }
-        return abilityList
-    }*/
 }

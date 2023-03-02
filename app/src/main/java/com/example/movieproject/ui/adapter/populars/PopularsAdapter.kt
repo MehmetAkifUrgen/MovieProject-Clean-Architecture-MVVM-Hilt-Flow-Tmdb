@@ -8,28 +8,28 @@ import com.example.movieproject.databinding.ItemMovieLayoutBinding
 import com.example.movieproject.utils.Constants.imagePath
 import com.example.movieproject.utils.loadImage
 
-class PopularsAdapter(private val agentsAdapterList : ArrayList<PopularUiModel>, private val itemClick: (PopularUiModel) -> Unit):RecyclerView.Adapter<PopularsAdapter.AgentsViewHolder>() {
+class PopularsAdapter(private val popularAdapterList : ArrayList<PopularUiModel>, private val itemClick: (PopularUiModel) -> Unit):RecyclerView.Adapter<PopularsAdapter.PopularViewHolder>() {
 
-    class AgentsViewHolder(val binding: ItemMovieLayoutBinding):RecyclerView.ViewHolder(binding.root)
+    class PopularViewHolder(val binding: ItemMovieLayoutBinding):RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgentsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val binding = ItemMovieLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return AgentsViewHolder(binding)
+        return PopularViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AgentsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
 
         holder.binding.apply {
-            agentNameTextView.text = agentsAdapterList[position].title
-            agentImageView.loadImage(imagePath+ agentsAdapterList[position].posterPath)
+            agentNameTextView.text = popularAdapterList[position].title
+            agentImageView.loadImage(imagePath+ popularAdapterList[position].posterPath)
 
             agentCardView.setOnClickListener {
-                itemClick.invoke(agentsAdapterList[position])
+                itemClick.invoke(popularAdapterList[position])
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return agentsAdapterList.size
+        return popularAdapterList.size
     }
 }

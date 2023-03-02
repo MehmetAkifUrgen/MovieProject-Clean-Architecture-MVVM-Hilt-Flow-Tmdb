@@ -5,14 +5,14 @@ import javax.inject.Inject
 
 open class PopularsMapper @Inject constructor() {
 
-    var agentsAdapterList = ArrayList<com.example.movieproject.data.uimodel.populars.PopularUiModel>()
+    var popularsAdapterList = ArrayList<com.example.movieproject.data.uimodel.populars.PopularUiModel>()
 
-    fun mapOnAgentsResponse(agentsResponse: PopularResponse){
-        agentsAdapterList.clear()
-        addAgentsItem(agentsResponse)
+    fun mapOnPopularsResponse(agentsResponse: PopularResponse){
+        popularsAdapterList.clear()
+        addPopularsItem(agentsResponse)
     }
 
-    private fun agentsResponseConvertToModel(agentsResponseItem: com.example.movieproject.data.response.popular.Result): com.example.movieproject.data.uimodel.populars.PopularUiModel {
+    private fun popularsResponseConvertToModel(agentsResponseItem: com.example.movieproject.data.response.popular.Result): com.example.movieproject.data.uimodel.populars.PopularUiModel {
         return com.example.movieproject.data.uimodel.populars.PopularUiModel().apply {
             agentsResponseItem.title.let { title-> this.title = title }
             agentsResponseItem.poster_path.let { image-> this.posterPath = image }
@@ -20,10 +20,10 @@ open class PopularsMapper @Inject constructor() {
         }
     }
 
-    private fun addAgentsItem(agentsResponse: PopularResponse) {
+    private fun addPopularsItem(agentsResponse: PopularResponse) {
         agentsResponse.results.forEach { response ->
-            val agentsItem = agentsResponseConvertToModel(response)
-            agentsAdapterList.add(agentsItem)
+            val agentsItem = popularsResponseConvertToModel(response)
+            popularsAdapterList.add(agentsItem)
         }
     }
 }

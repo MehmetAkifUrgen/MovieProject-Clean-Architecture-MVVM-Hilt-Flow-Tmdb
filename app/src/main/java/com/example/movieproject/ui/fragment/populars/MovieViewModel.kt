@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
-    private val agentsUseCase: PopularsUseCase,
-    private val agentsMapper: PopularsMapper,
+    private val popularsUseCase: PopularsUseCase,
+    private val popularsMapper: PopularsMapper,
     private val upComingMapper:UpComingMapper,
     private val upComingsUseCase: UpComingsUseCase
 ) : ViewModel() {
@@ -27,10 +27,10 @@ class MovieViewModel @Inject constructor(
     val upcomingAdapterList : LiveData<ArrayList<UpComingUiModel>> = _upcomingAdapterList
 
     fun agentsRequest() {
-        agentsUseCase.execute(
+        popularsUseCase.execute(
             onSuccess = {
-                agentsMapper.mapOnAgentsResponse(it)
-                _agentAdapterList.value = agentsMapper.agentsAdapterList
+                popularsMapper.mapOnPopularsResponse(it)
+                _agentAdapterList.value = popularsMapper.popularsAdapterList
             },
             onError = {
                 it.printStackTrace()

@@ -7,28 +7,28 @@ import com.example.movieproject.data.uimodel.upcoming.UpComingUiModel
 import com.example.movieproject.databinding.ItemMovieLayoutBinding
 import com.example.movieproject.utils.loadImage
 
-class UpComingsAdapter(private val agentsAdapterList : ArrayList<UpComingUiModel>, private val itemClick: (UpComingUiModel) -> Unit):RecyclerView.Adapter<UpComingsAdapter.AgentsViewHolder>() {
+class UpComingsAdapter(private val upcomingAdapterList : ArrayList<UpComingUiModel>, private val itemClick: (UpComingUiModel) -> Unit):RecyclerView.Adapter<UpComingsAdapter.UpComingViewHolder>() {
 
-    class AgentsViewHolder(val binding: ItemMovieLayoutBinding):RecyclerView.ViewHolder(binding.root)
+    class UpComingViewHolder(val binding: ItemMovieLayoutBinding):RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgentsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpComingViewHolder {
         val binding = ItemMovieLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return AgentsViewHolder(binding)
+        return UpComingViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AgentsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UpComingViewHolder, position: Int) {
         val imagePath="https://image.tmdb.org/t/p/w500"
         holder.binding.apply {
-            agentNameTextView.text = agentsAdapterList[position].title
-            agentImageView.loadImage(imagePath+ agentsAdapterList[position].posterPath)
+            agentNameTextView.text = upcomingAdapterList[position].title
+            agentImageView.loadImage(imagePath+ upcomingAdapterList[position].posterPath)
 
             agentCardView.setOnClickListener {
-                itemClick.invoke(agentsAdapterList[position])
+                itemClick.invoke(upcomingAdapterList[position])
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return agentsAdapterList.size
+        return upcomingAdapterList.size
     }
 }

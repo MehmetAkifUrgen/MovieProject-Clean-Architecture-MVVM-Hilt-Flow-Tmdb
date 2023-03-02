@@ -41,8 +41,8 @@ class SearchViewModel @Inject constructor(
         discoverUseCase.discoverId(discoverId)
         discoverUseCase.execute(
             onSuccess = {
-                popularsMapper.mapOnAgentsResponse(it)
-                _discoverAdapterList.value = popularsMapper.agentsAdapterList
+                popularsMapper.mapOnPopularsResponse(it)
+                _discoverAdapterList.value = popularsMapper.popularsAdapterList
             },
             onError = {
                 it.printStackTrace()
@@ -66,8 +66,8 @@ class SearchViewModel @Inject constructor(
         searcUseCase.getQuery(query)
         searcUseCase.execute(
             onSuccess = {
-                popularsMapper.mapOnAgentsResponse(it)
-                _searchAdapterList.value = popularsMapper.agentsAdapterList
+                popularsMapper.mapOnPopularsResponse(it)
+                _searchAdapterList.value = popularsMapper.popularsAdapterList
             },
             onError = {
                 it.printStackTrace()

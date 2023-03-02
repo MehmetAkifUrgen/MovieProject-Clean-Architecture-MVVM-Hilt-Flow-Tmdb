@@ -10,20 +10,20 @@ open class UpComingMapper @Inject constructor() {
 
     fun mapOnUpComingResponse(agentsResponse: UpComingResponse){
         upcomingsAdapterList.clear()
-        addAgentsItem(agentsResponse)
+        addUpcomingItem(agentsResponse)
     }
 
-    private fun agentsResponseConvertToModel(agentsResponseItem: com.example.movieproject.data.response.upcoming.Result): UpComingUiModel {
+    private fun upcomingsResponseConvertToModel(popularsResponseItem: com.example.movieproject.data.response.upcoming.Result): UpComingUiModel {
         return UpComingUiModel().apply {
-            agentsResponseItem.title.let { title-> this.title = title }
-            agentsResponseItem.poster_path.let { image-> this.posterPath = image }
-            agentsResponseItem.id.let { id-> this.id = id.toString() }
+            popularsResponseItem.title.let { title-> this.title = title }
+            popularsResponseItem.poster_path.let { image-> this.posterPath = image }
+            popularsResponseItem.id.let { id-> this.id = id.toString() }
         }
     }
 
-    private fun addAgentsItem(agentsResponse: UpComingResponse) {
-        agentsResponse.results.forEach { response ->
-            val agentsItem = agentsResponseConvertToModel(response)
+    private fun addUpcomingItem(upcomingsResponse: UpComingResponse) {
+        upcomingsResponse.results.forEach { response ->
+            val agentsItem = upcomingsResponseConvertToModel(response)
             upcomingsAdapterList.add(agentsItem)
         }
     }

@@ -22,8 +22,8 @@ class MovieDetailViewModel @Inject constructor(
         agentDetailUseCase.popularId(id)
         agentDetailUseCase.execute(
             onSuccess = {
-                agentDetailMapper.mapOnAgentDetailResponse(it)
-                _agentDetailItem.value = agentDetailMapper.agentDetailItem
+                agentDetailMapper.mapOnPopularDetailResponse(it)
+                _agentDetailItem.value = agentDetailMapper.popularDetailItem
             },
             onError = {
                 it.printStackTrace()
