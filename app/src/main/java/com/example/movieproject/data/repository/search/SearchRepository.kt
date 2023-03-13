@@ -6,9 +6,10 @@ import com.example.movieproject.data.response.popular.PopularDetailsResponse
 import com.example.movieproject.data.response.upcoming.UpComingResponse
 import com.example.movieproject.data.response.watch.WatchResponse
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 interface SearchRepository {
-     fun searchMovie(query:String):Single<PopularResponse>
-     fun getGenre():Single<GenreResponse>
-     fun getDiscover(genre:String):Single<PopularResponse>
+     suspend fun searchMovie(query:String): Flow<PopularResponse>
+     suspend fun getGenre():Flow<GenreResponse>
+     suspend  fun getDiscover(genre:String):Flow<PopularResponse>
 }

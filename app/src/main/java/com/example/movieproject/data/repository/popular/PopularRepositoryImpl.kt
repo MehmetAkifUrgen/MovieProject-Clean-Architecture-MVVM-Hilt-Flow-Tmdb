@@ -7,22 +7,23 @@ import com.example.movieproject.data.response.popular.PopularDetailsResponse
 import com.example.movieproject.data.response.upcoming.UpComingResponse
 import com.example.movieproject.data.response.watch.WatchResponse
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 class PopularRepositoryImpl(private val serviceInterface: ServiceInterface) : PopularRepository {
 
-    override fun getPopulars(): Single<PopularResponse> {
-        return serviceInterface.getPopulars()
+    override suspend fun getPopulars(page:Int): Flow<PopularResponse> {
+        return serviceInterface.getPopulars(page)
     }
 
-    override fun getUpComing(): Single<UpComingResponse> {
+    override suspend fun getUpComing(): Flow<UpComingResponse> {
         return serviceInterface.getUpComing()
     }
 
-    override fun getWatch(id: String): Single<WatchResponse> {
+    override suspend fun getWatch(id: String): Flow<WatchResponse> {
         return serviceInterface.getWatch(id)
     }
 
-    override fun getPopularDetails(id: String): Single<PopularDetailsResponse> {
+    override suspend fun getPopularDetails(id: String): Flow<PopularDetailsResponse> {
         return serviceInterface.getPopularDetails(id)
     }
 }

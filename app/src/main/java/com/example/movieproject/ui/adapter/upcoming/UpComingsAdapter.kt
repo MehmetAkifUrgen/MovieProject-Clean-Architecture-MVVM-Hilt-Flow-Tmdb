@@ -19,7 +19,7 @@ class UpComingsAdapter(private val upcomingAdapterList : ArrayList<UpComingUiMod
     override fun onBindViewHolder(holder: UpComingViewHolder, position: Int) {
         val imagePath="https://image.tmdb.org/t/p/w500"
         holder.binding.apply {
-            agentNameTextView.text = upcomingAdapterList[position].title
+           // agentNameTextView.text = upcomingAdapterList[position].title
             agentImageView.loadImage(imagePath+ upcomingAdapterList[position].posterPath)
 
             agentCardView.setOnClickListener {

@@ -5,6 +5,7 @@ import com.example.movieproject.data.repository.popular.PopularRepository
 import com.example.movieproject.data.repository.search.SearchRepository
 import com.example.movieproject.data.response.popular.PopularResponse
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SearchMovieUseCase @Inject constructor(
@@ -16,7 +17,8 @@ class SearchMovieUseCase @Inject constructor(
     fun getQuery(querys: String) {
         query=querys
     }
-    override fun buildUseCaseSingle(): Single<PopularResponse> {
+
+    override suspend fun buildUseCaseFlow(): Flow<PopularResponse> {
         return searchRepository.searchMovie(query)
     }
 }

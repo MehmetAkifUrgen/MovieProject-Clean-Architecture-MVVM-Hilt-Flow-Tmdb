@@ -6,13 +6,14 @@ import com.example.movieproject.data.response.popular.PopularDetailsResponse
 import com.example.movieproject.data.response.upcoming.UpComingResponse
 import com.example.movieproject.data.response.watch.WatchResponse
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 interface PopularRepository {
 
-     fun getPopulars(): Single<PopularResponse>
-     fun getUpComing(): Single<UpComingResponse>
-     fun getWatch(id: String):Single<WatchResponse>
+    suspend fun getPopulars(page:Int): Flow<PopularResponse>
+    suspend fun getUpComing(): Flow<UpComingResponse>
+    suspend fun getWatch(id: String):Flow<WatchResponse>
 
 
-     fun getPopularDetails(id: String): Single<PopularDetailsResponse>
+    suspend fun getPopularDetails(id: String): Flow<PopularDetailsResponse>
 }

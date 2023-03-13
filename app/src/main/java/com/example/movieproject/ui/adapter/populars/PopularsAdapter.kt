@@ -20,7 +20,7 @@ class PopularsAdapter(private val popularAdapterList : ArrayList<PopularUiModel>
     override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
 
         holder.binding.apply {
-            agentNameTextView.text = popularAdapterList[position].title
+           //agentNameTextView.text = popularAdapterList[position].title
             agentImageView.loadImage(imagePath+ popularAdapterList[position].posterPath)
 
             agentCardView.setOnClickListener {

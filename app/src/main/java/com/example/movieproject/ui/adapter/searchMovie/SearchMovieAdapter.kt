@@ -23,7 +23,7 @@ class SearchMovieAdapter(private val searchMovieList: ArrayList<PopularUiModel>,
     override fun onBindViewHolder(holder: SearchMovieViewHolder, position: Int) {
 
         holder.binding.apply {
-            agentNameTextView.text = searchMovieList[position].title
+           // agentNameTextView.text = searchMovieList[position].title
             agentImageView.loadImage(imagePath+ searchMovieList[position].posterPath)
 
             agentCardView.setOnClickListener {

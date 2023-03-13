@@ -6,6 +6,7 @@ import com.example.movieproject.data.repository.popular.PopularRepository
 import com.example.movieproject.data.response.casting.CastResponse
 import com.example.movieproject.data.response.popular.PopularDetailsResponse
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CastUseCase @Inject constructor(
@@ -17,7 +18,9 @@ class CastUseCase @Inject constructor(
     fun popularId(uii: String) {
         id = uii
     }
-    override fun buildUseCaseSingle(): Single<CastResponse> {
+
+    override suspend fun buildUseCaseFlow(): Flow<CastResponse> {
         return castRepository.getCast(id)
     }
+
 }

@@ -23,7 +23,7 @@ class DiscoverAdapter(private val discoverList: ArrayList<PopularUiModel>, priva
     override fun onBindViewHolder(holder: DiscoverViewHolder, position: Int) {
 
         holder.binding.apply {
-            agentNameTextView.text = discoverList[position].title
+           // agentNameTextView.text = discoverList[position].title
             agentImageView.loadImage(imagePath+ discoverList[position].posterPath)
 
             agentCardView.setOnClickListener {

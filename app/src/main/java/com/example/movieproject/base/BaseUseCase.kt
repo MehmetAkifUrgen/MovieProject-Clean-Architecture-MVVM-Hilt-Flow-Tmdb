@@ -1,43 +1,43 @@
 package com.example.movieproject.base
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.*
 
 abstract class BaseUseCase<T : Any> {
 
-    private val compositeDisposable = CompositeDisposable()
-    private var disposable: Disposable? = null
+    private var disposable: Flow<T>? = null
 
-    internal abstract fun buildUseCaseSingle(): Single<T>
+    internal abstract suspend fun buildUseCaseFlow(): Flow<T>
 
-    fun execute(
-        onSuccess: ((t: T) -> Unit),
-        onError: ((t: Throwable) -> Unit),
+    suspend fun execute(
+        onSuccess: (T) -> Unit,
+        onError: (Throwable) -> Unit,
         onFinished: () -> Unit = {}
-    ) {
+    ): Job {
         disposeLast()
-        disposable = buildUseCaseSingle()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doAfterTerminate(onFinished)
-            .subscribe(onSuccess, onError)
-        add()
+        return buildUseCaseFlow()
+            .flowOn(IO)
+            .onCompletion { onFinished() }
+            .catch { e -> onError(e) }
+            .onEach { onSuccess(it) }
+            .launchIn(GlobalScope)
     }
 
-    private fun disposeLast() {
+    private suspend fun disposeLast() {
         disposable?.let {
-            if (!it.isDisposed) {
-                it.dispose()
+            if (it is Flow<*>) {
+                it.collect()
             }
         }
     }
 
-    private fun add() {
-        disposable?.let {
-            compositeDisposable.add(it)
-        }
+    private val disposables = CompositeDisposable()
+
+    fun dispose() {
+        disposables.dispose()
     }
+
+
 }

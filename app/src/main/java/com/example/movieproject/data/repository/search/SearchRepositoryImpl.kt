@@ -7,19 +7,20 @@ import com.example.movieproject.data.response.popular.PopularDetailsResponse
 import com.example.movieproject.data.response.upcoming.UpComingResponse
 import com.example.movieproject.data.response.watch.WatchResponse
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 class SearchRepositoryImpl(private val serviceInterface: ServiceInterface) : SearchRepository {
 
 
-    override fun searchMovie(query: String): Single<PopularResponse> {
+    override suspend fun searchMovie(query: String): Flow<PopularResponse> {
         return serviceInterface.searchMovie(query)
     }
 
-    override fun getGenre(): Single<GenreResponse> {
+    override suspend fun getGenre(): Flow<GenreResponse> {
         return serviceInterface.getGenres()
     }
 
-    override fun getDiscover(genre: String): Single<PopularResponse> {
+    override suspend fun getDiscover(genre: String): Flow<PopularResponse> {
         return serviceInterface.getDiscover(genre)
     }
 

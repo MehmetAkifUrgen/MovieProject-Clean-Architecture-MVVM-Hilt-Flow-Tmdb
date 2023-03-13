@@ -1,5 +1,6 @@
 package com.example.movieproject.ui.mapper.upcoming
 
+import com.example.movieproject.data.response.popular.Movie
 import com.example.movieproject.data.response.upcoming.UpComingResponse
 import com.example.movieproject.data.uimodel.upcoming.UpComingUiModel
 import javax.inject.Inject
@@ -13,7 +14,7 @@ open class UpComingMapper @Inject constructor() {
         addUpcomingItem(agentsResponse)
     }
 
-    private fun upcomingsResponseConvertToModel(popularsResponseItem: com.example.movieproject.data.response.upcoming.Result): UpComingUiModel {
+    private fun upcomingsResponseConvertToModel(popularsResponseItem: Movie): UpComingUiModel {
         return UpComingUiModel().apply {
             popularsResponseItem.title.let { title-> this.title = title }
             popularsResponseItem.poster_path.let { image-> this.posterPath = image }

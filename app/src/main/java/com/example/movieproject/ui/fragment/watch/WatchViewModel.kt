@@ -4,9 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.movieproject.data.uimodel.watch.WatchUiModel
 import com.example.movieproject.data.usecase.watch.WatchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,27 +24,29 @@ class WatchViewModel @Inject constructor(
 
 
     fun watchRequest(id:String) {
-        watchUseCase.id(id)
-        watchUseCase.execute(
-            onSuccess = { watchResponse ->
-                Log.d("selam", watchResponse.results.toString())
-                watchResponse.results.forEach { it1 ->
-                    if(it1.link.indexOf("locale=AT") != -1){
-                        Log.d("naber",it1.toString())
-                      it1.flatrate.forEach {
-                          array.add(it as WatchUiModel)
-                      }
-                        it1.buy.forEach {
-                            array.add(it as WatchUiModel)
-                        }
-                  }
-                }
-                _pro.value=array
-            },
-            onError = {
-                it.printStackTrace()
-            }
-        )
+       viewModelScope.launch {
+           watchUseCase.id(id)
+           watchUseCase.execute(
+               onSuccess = { watchResponse ->
+                   Log.d("selam", watchResponse.results.toString())
+                   watchResponse.results.forEach { it1 ->
+                       if(it1.link.indexOf("locale=AT") != -1){
+                           Log.d("naber",it1.toString())
+                           it1.flatrate.forEach {
+                               array.add(it as WatchUiModel)
+                           }
+                           it1.buy.forEach {
+                               array.add(it as WatchUiModel)
+                           }
+                       }
+                   }
+                   _pro.postValue(array)
+               },
+               onError = {
+                   it.printStackTrace()
+               }
+           )
+       }
     }
 
 }
