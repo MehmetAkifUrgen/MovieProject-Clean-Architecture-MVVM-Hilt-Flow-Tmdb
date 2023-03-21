@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieproject.data.response.casting.Cast
 import com.example.movieproject.data.uimodel.cast.CastDetailUiModel
 import com.example.movieproject.databinding.ItemCastLayoutBinding
+import com.example.movieproject.utils.Constants
 import com.example.movieproject.utils.Constants.imagePath
 import com.example.movieproject.utils.loadImage
 
@@ -22,7 +23,7 @@ class CastAdapter(private val castList: ArrayList<CastDetailUiModel>):RecyclerVi
 
         holder.binding.apply {
             caracterText.text = castList[position].character
-            castImage.loadImage(imagePath+ castList[position].profile_path)
+            castImage.loadImage(imagePath + castList[position].profile_path)
             realName.text=castList[position].original_name
 
         }

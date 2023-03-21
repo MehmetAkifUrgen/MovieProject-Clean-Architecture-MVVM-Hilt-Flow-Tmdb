@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface PopularRepository {
 
-    suspend fun getPopulars(page:Int): Flow<PopularResponse>
-    suspend fun getUpComing(): Flow<UpComingResponse>
+    suspend fun getPopulars(page:Int): PopularResponse
+    suspend fun getUpComing(page: Int): UpComingResponse
     suspend fun getWatch(id: String):Flow<WatchResponse>
 
 

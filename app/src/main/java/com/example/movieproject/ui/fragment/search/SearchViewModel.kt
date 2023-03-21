@@ -1,13 +1,14 @@
 package com.example.movieproject.ui.fragment.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import androidx.paging.liveData
 import com.example.movieproject.data.api.ServiceInterface
+import com.example.movieproject.data.pagingdatasource.DiscoverPaging
 import com.example.movieproject.data.uimodel.genre.GenreUiModel
 import com.example.movieproject.data.uimodel.populars.PopularUiModel
-import com.example.movieproject.data.usecase.discover.DiscoverUseCase
 import com.example.movieproject.data.usecase.genre.GenreUseCase
 import com.example.movieproject.data.usecase.searchMovie.SearchMovieUseCase
 import com.example.movieproject.ui.mapper.genre.GenreMapper
@@ -22,7 +23,6 @@ class SearchViewModel @Inject constructor(
     private val genreUseCase: GenreUseCase,
     private val genreMapper: GenreMapper,
     private val popularsMapper: PopularsMapper,
-    private val discoverUseCase: DiscoverUseCase,
     private val serviceInterface: ServiceInterface,
 
 ) : ViewModel() {
@@ -37,21 +37,34 @@ class SearchViewModel @Inject constructor(
 
     val editTextValue = MutableLiveData<String>()
 
-    fun discover(discoverId:String){
-        viewModelScope.launch {
-            discoverUseCase.discoverId(discoverId)
-            discoverUseCase.execute(
-                onSuccess = {
-                    popularsMapper.mapOnPopularsResponse(it)
-                    _discoverAdapterList.postValue(popularsMapper.popularsAdapterList)
-                },
-                onError = {
-                    it.printStackTrace()
-                }
-            )
-        }
+    private val genre = MutableLiveData<String>()
 
+
+    val list = genre.switchMap { query ->
+        Pager(PagingConfig(pageSize = 10)) {
+            DiscoverPaging(query, serviceInterface)
+        }.liveData.cachedIn(viewModelScope)
     }
+
+    fun setQuery(s: String) {
+        genre.postValue(s)
+    }
+
+//    fun discover(discoverId:String){
+//        viewModelScope.launch {
+//            discoverUseCase.discoverId(discoverId)
+//            discoverUseCase.execute(
+//                onSuccess = {
+//                    popularsMapper.mapOnPopularsResponse(it)
+//                    _discoverAdapterList.postValue(popularsMapper.popularsAdapterList)
+//                },
+//                onError = {
+//                    it.printStackTrace()
+//                }
+//            )
+//        }
+//
+//    }
 
      fun genreRequest(){
          viewModelScope.launch {

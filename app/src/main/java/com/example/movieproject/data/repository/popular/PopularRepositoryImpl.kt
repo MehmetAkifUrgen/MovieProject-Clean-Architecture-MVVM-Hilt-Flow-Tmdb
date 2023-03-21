@@ -11,12 +11,12 @@ import kotlinx.coroutines.flow.Flow
 
 class PopularRepositoryImpl(private val serviceInterface: ServiceInterface) : PopularRepository {
 
-    override suspend fun getPopulars(page:Int): Flow<PopularResponse> {
+    override suspend fun getPopulars(page:Int): PopularResponse {
         return serviceInterface.getPopulars(page)
     }
 
-    override suspend fun getUpComing(): Flow<UpComingResponse> {
-        return serviceInterface.getUpComing()
+    override suspend fun getUpComing(page: Int): UpComingResponse {
+        return serviceInterface.getUpComing(page)
     }
 
     override suspend fun getWatch(id: String): Flow<WatchResponse> {

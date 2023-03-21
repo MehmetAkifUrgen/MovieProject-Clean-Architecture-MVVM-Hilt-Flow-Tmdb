@@ -11,5 +11,5 @@ import kotlinx.coroutines.flow.Flow
 interface SearchRepository {
      suspend fun searchMovie(query:String): Flow<PopularResponse>
      suspend fun getGenre():Flow<GenreResponse>
-     suspend  fun getDiscover(genre:String):Flow<PopularResponse>
+     suspend  fun getDiscover(genre:String,page:Int):PopularResponse
 }

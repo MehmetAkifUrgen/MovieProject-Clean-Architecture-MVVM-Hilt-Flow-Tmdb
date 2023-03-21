@@ -1,53 +1,28 @@
 package com.example.movieproject.ui.fragment.populars
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movieproject.data.uimodel.populars.PopularUiModel
-import com.example.movieproject.data.uimodel.upcoming.UpComingUiModel
-import com.example.movieproject.ui.mapper.populars.PopularsMapper
-import com.example.movieproject.data.usecase.populars.PopularsUseCase
-import com.example.movieproject.data.usecase.upcoming.UpComingsUseCase
-import com.example.movieproject.ui.mapper.upcoming.UpComingMapper
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import androidx.paging.liveData
+import com.example.movieproject.data.api.ServiceInterface
+import com.example.movieproject.data.pagingdatasource.MoviePaging
+import com.example.movieproject.data.pagingdatasource.UpComingPaging
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
-    private val popularsUseCase: PopularsUseCase,
-    private val popularsMapper: PopularsMapper,
-    private val upComingMapper:UpComingMapper,
-    private val upComingsUseCase: UpComingsUseCase
+    private val serviceInterface: ServiceInterface
 ) : ViewModel() {
 
-    private val _agentAdapterList = MutableLiveData<ArrayList<PopularUiModel>>()
-    val agentAdapterList : LiveData<ArrayList<PopularUiModel>> = _agentAdapterList
+    val popularlist = Pager(PagingConfig(pageSize = 20)) {
+            MoviePaging(serviceInterface)
+        }.liveData.cachedIn(viewModelScope)
 
-    private val _upcomingAdapterList = MutableLiveData<ArrayList<UpComingUiModel>>()
-    val upcomingAdapterList : LiveData<ArrayList<UpComingUiModel>> = _upcomingAdapterList
+    val upCominglist = Pager(PagingConfig(pageSize = 20)) {
+        UpComingPaging(serviceInterface)
+    }.liveData.cachedIn(viewModelScope)
 
-    fun agentsRequest() {
-       viewModelScope.launch {
-           popularsUseCase.execute(
-               onSuccess = {
-                   popularsMapper.mapOnPopularsResponse(it)
-                   _agentAdapterList.postValue(popularsMapper.popularsAdapterList)
-               },
-               onError = {
-                   it.printStackTrace()
-               }
-           )
-           upComingsUseCase.execute(
-               onSuccess = {
-                   upComingMapper.mapOnUpComingResponse(it)
-                   _upcomingAdapterList.postValue(upComingMapper.upcomingsAdapterList)
-               },
-               onError = {
-                   it.printStackTrace()
-               }
-           )
-       }
-    }
 }

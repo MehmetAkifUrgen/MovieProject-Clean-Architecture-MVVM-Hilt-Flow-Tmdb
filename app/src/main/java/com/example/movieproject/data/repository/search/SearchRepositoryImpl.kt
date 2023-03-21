@@ -20,8 +20,8 @@ class SearchRepositoryImpl(private val serviceInterface: ServiceInterface) : Sea
         return serviceInterface.getGenres()
     }
 
-    override suspend fun getDiscover(genre: String): Flow<PopularResponse> {
-        return serviceInterface.getDiscover(genre)
+    override suspend fun getDiscover(genre: String,page:Int): PopularResponse {
+        return serviceInterface.getDiscover(genre,page)
     }
 
 }

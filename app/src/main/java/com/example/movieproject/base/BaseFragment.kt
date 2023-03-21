@@ -20,8 +20,11 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, getLayoutId(), container, false)
+
         return binding.root
     }
+
+
 
     @LayoutRes
     abstract fun getLayoutId(): Int

@@ -4,52 +4,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.AgentsFragment">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@color/background"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@color/blue"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-                <TextView
+                <ProgressBar
+                    android:id="@+id/progressBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:text="Popular Movies" />
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout"
+                    app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
-                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
-                    android:id="@+id/movie_recycler_view"
+                <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
 
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:text="UpComing Movies" />
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/orange"
+                        android:text="Popular Movies" />
 
-                    android:id="@+id/upcoming_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/movie_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/item_movie_layout" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/orange"
+                        android:text="UpComing Movies" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/upcoming_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:listitem="@layout/item_movie_layout" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
 
 </layout>

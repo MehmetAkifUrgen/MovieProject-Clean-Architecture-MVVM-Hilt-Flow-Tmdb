@@ -13,7 +13,7 @@
         android:id="@+id/my_drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        android:background="@color/blue">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:minHeight="48dp"
                     android:padding="4sp"
                     android:text="@={myViewModel.editTextValue}"
-                    android:textColor="@color/white"
+                    android:textColor="@color/orange"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -63,7 +63,7 @@
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
-            android:background="@color/background"
+            android:background="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start">

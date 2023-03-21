@@ -49,14 +49,14 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
     }
 
     private fun initBackButtonClickListener() {
-        binding.agentDetailLayout.backButton.setOnClickListener {
+        binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
 
     private fun initUi(agentDetailItem: PopularDetailsUiModel) {
-        binding.agentDetailLayout.apply {
+        binding.apply {
 
             agentDetailItem.let { item ->
                 topImage.loadImage(imagePath + item.backdrop_path)
@@ -91,7 +91,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
     }
 
     private fun crewUi(crewDetailUiModel: CrewDetailUiModel) {
-        binding.agentDetailLayout.directorName.text = crewDetailUiModel.name
+        binding.directorName.text = crewDetailUiModel.name
     }
 
     private fun initAgentDetailItemObserve() {
@@ -124,7 +124,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
 
         castItem.let {
             castAdapter = CastAdapter(it)
-            binding.agentDetailLayout.castRecyclerView.adapter = castAdapter
+            binding.castRecyclerView.adapter = castAdapter
 
         }
     }
@@ -133,7 +133,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
 
         crewItem.let {
             crewAdapter = CrewAdapter(it)
-            binding.agentDetailLayout.crewRecyclerView.adapter = crewAdapter
+            binding.crewRecyclerView.adapter = crewAdapter
 
         }
     }
@@ -142,10 +142,12 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
 
         providerItem.let {
             providerAdapter = WatchAdapter(it)
-            binding.agentDetailLayout.providerRecylerView.adapter = providerAdapter
+            binding.providerRecylerView.adapter = providerAdapter
 
         }
     }
+
+
 
 
 }
