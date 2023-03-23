@@ -39,15 +39,28 @@ class SearchViewModel @Inject constructor(
 
     private val genre = MutableLiveData<String>()
 
+    private val startDate = MutableLiveData<String>()
+
+    private val endDate = MutableLiveData<String>()
+
 
     val list = genre.switchMap { query ->
         Pager(PagingConfig(pageSize = 10)) {
-            DiscoverPaging(query, serviceInterface)
+            startDate.value?.let { endDate.value?.let { it1 ->
+                DiscoverPaging(query, it,
+                    it1,serviceInterface)
+            } }!!
         }.liveData.cachedIn(viewModelScope)
     }
 
     fun setQuery(s: String) {
         genre.postValue(s)
+    }
+    fun setStartDate(s: String) {
+        startDate.postValue(s)
+    }
+    fun setEndDate(s: String) {
+        endDate.postValue(s)
     }
 
 //    fun discover(discoverId:String){

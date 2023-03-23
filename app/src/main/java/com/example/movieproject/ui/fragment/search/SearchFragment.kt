@@ -1,9 +1,11 @@
 package com.example.movieproject.ui.fragment.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.NumberPicker
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
@@ -12,15 +14,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieproject.R
 import com.example.movieproject.base.BaseFragment
 import com.example.movieproject.data.uimodel.genre.GenreUiModel
-import com.example.movieproject.data.uimodel.populars.PopularUiModel
 import com.example.movieproject.databinding.FragmentSearchBinding
-import com.example.movieproject.ui.adapter.discover.DiscoverAdapter
 import com.example.movieproject.ui.adapter.discover.DiscoverPagingAdapter
 import com.example.movieproject.ui.adapter.genre.GenreAdapter
 import com.example.movieproject.ui.adapter.searchMovie.SearchMovieAdapter
 import com.example.movieproject.ui.fragment.populars.MovieFragmentDirections
 import com.google.android.flexbox.*
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
@@ -31,19 +33,46 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private val discoverAdapter = DiscoverPagingAdapter()
     private var genreAdapter: GenreAdapter? = null
     private val viewModel: SearchViewModel by viewModels()
+    var genreId:String=""
 
     override fun getLayoutId(): Int = R.layout.fragment_search
 
 
     override fun prepareView(savedInstanceState: Bundle?) {
+        binding.startDate.isEnabled=false
+        binding.endDate.isEnabled=false
         searchFunc()
         viewModel.genreRequest()
         initGenre()
+
+        yearPicker()
 
         drawerLayout()
         discoverClick()
 
 
+
+    }
+
+
+
+
+
+    private fun yearPicker() {
+        binding.apply {
+            startDate.minValue = 1900
+            startDate.maxValue = 2100
+            startDate.setOnValueChangedListener { numberPicker, i, i2 ->
+                binding.startDate.value = numberPicker.value
+            }
+
+            endDate.minValue = 1900
+            endDate.maxValue = 2100
+            endDate.setOnValueChangedListener { numberPicker, i, i2 ->
+                binding.endDate.value = numberPicker.value
+                discoverUpdate(genreId)
+            }
+        }
     }
 
     private fun searchFunc() {
@@ -101,16 +130,23 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         genreUiModels.let { adapterList ->
             genreAdapter = GenreAdapter(adapterList, itemClick = {
                 it.id?.let { uuid ->
-
-                    viewModel.setQuery(uuid)
-                    setRecyclerView()
-                    observeDiscover()
-
+                    discoverUpdate(uuid)
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }
             })
             binding.genreRecyclerView.adapter = genreAdapter
         }
+    }
+
+    private fun discoverUpdate(uuid: String) {
+        binding.startDate.isEnabled = true
+        binding.endDate.isEnabled=true
+        viewModel.setStartDate(binding.startDate.value.toString())
+        viewModel.setEndDate(binding.endDate.value.toString())
+        genreId = uuid
+        viewModel.setQuery(uuid)
+        setRecyclerView()
+        observeDiscover()
     }
 
     private fun observeDiscover() {

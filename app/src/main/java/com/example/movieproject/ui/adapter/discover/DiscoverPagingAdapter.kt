@@ -15,6 +15,8 @@ class DiscoverPagingAdapter : PagingDataAdapter<Movie, DiscoverPagingAdapter.MyV
 
     var onCLick: ((String) -> Unit)? = null
 
+
+
     companion object {
         val DIFF_UTIL = object : DiffUtil.ItemCallback<Movie>() {
             override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {

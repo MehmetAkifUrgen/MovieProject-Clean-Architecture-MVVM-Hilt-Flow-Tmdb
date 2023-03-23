@@ -47,6 +47,33 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
+          <LinearLayout
+
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+              <NumberPicker
+                  android:solidColor="@color/white"
+                  android:backgroundTint="@color/white"
+                  android:id="@+id/startDate"
+                  android:layout_margin="10dp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="60dp"
+                  android:layout_gravity="center"
+                  android:gravity="center" />
+              <NumberPicker
+                  android:value="1994"
+                  android:layout_margin="10dp"
+                  android:id="@+id/endDate"
+                  android:layout_width="wrap_content"
+                  android:layout_height="60dp"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  />
+
+          </LinearLayout>
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/searchRecyclerView"
                 android:layout_width="match_parent"

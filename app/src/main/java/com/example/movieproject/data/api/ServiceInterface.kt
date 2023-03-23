@@ -16,10 +16,10 @@ import retrofit2.http.Query
 interface ServiceInterface {
 
     @GET("movie/popular?api_key=$api_key&language=en-US")
-    suspend fun getPopulars(@Query("page") page:Int): PopularResponse
+    suspend fun getPopulars(@Query("page") page: Int): PopularResponse
 
     @GET("movie/upcoming?api_key=$api_key&language=en-US")
-    suspend fun getUpComing(@Query("page") page:Int): UpComingResponse
+    suspend fun getUpComing(@Query("page") page: Int): UpComingResponse
 
     @GET("movie/{id}?api_key=$api_key&language=tr-TR")
     fun getPopularDetails(@Path("id") id: String): Flow<PopularDetailsResponse>
@@ -34,9 +34,14 @@ interface ServiceInterface {
     fun searchMovie(@Query("query") search: String): Flow<PopularResponse>
 
     @GET("genre/movie/list?api_key=$api_key&language=en-US")
-    fun getGenres() : Flow<GenreResponse>
+    fun getGenres(): Flow<GenreResponse>
 
     @GET("discover/movie?api_key=$api_key&language=en-US&sort_by=popularity.desc&include_adult=false")
-    suspend fun getDiscover(@Query("with_genres") genre: String,@Query("page") page:Int): PopularResponse
+    suspend fun getDiscover(
+        @Query("with_genres") genre: String,
+        @Query("page") page: Int,
+        @Query("release_date.gte") startDate: String,
+        @Query("release_date.lte") endDate: String
+    ): PopularResponse
 
 }

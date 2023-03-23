@@ -7,7 +7,7 @@ import com.example.movieproject.data.api.ServiceInterface
 import com.example.movieproject.data.response.popular.Movie
 
 
-class DiscoverPaging(val genre:String,private val movieInterface: ServiceInterface) : PagingSource<Int, Movie>() {
+class DiscoverPaging(val genre:String,val startDate:String,val endDate:String, private val movieInterface: ServiceInterface) : PagingSource<Int, Movie>() {
 
     override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
         return state.anchorPosition?.let {
@@ -21,7 +21,7 @@ class DiscoverPaging(val genre:String,private val movieInterface: ServiceInterfa
 
         return try {
 
-            val data = movieInterface.getDiscover(genre,page)
+            val data = movieInterface.getDiscover(genre,page,startDate,endDate)
             Log.d("TAG", "load: ${data.results}")
             LoadResult.Page(
                 data = data.results,
