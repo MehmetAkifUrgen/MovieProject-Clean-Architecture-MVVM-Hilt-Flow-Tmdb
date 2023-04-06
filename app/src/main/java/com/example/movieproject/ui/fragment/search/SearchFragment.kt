@@ -29,6 +29,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     lateinit var drawerLayout: DrawerLayout
 
+
+
     private var searchAdapter: SearchMovieAdapter? = null
     private val discoverAdapter = DiscoverPagingAdapter()
     private var genreAdapter: GenreAdapter? = null
@@ -36,22 +38,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     var genreId:String=""
 
     override fun getLayoutId(): Int = R.layout.fragment_search
-
-
     override fun prepareView(savedInstanceState: Bundle?) {
-        binding.startDate.isEnabled=false
-        binding.endDate.isEnabled=false
         searchFunc()
         viewModel.genreRequest()
         initGenre()
-
         yearPicker()
-
         drawerLayout()
         discoverClick()
-
-
-
     }
 
 
@@ -60,16 +53,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun yearPicker() {
         binding.apply {
-            startDate.minValue = 1900
-            startDate.maxValue = 2100
-            startDate.setOnValueChangedListener { numberPicker, i, i2 ->
-                binding.startDate.value = numberPicker.value
+            startYear.minValue = 1900
+            startYear.maxValue = 2100
+            startYear.setOnValueChangedListener { numberPicker, i, i2 ->
+                binding.startYear.value = numberPicker.value
             }
 
-            endDate.minValue = 1900
-            endDate.maxValue = 2100
-            endDate.setOnValueChangedListener { numberPicker, i, i2 ->
-                binding.endDate.value = numberPicker.value
+            endYear.minValue = 1901
+            endYear.maxValue = 2100
+            endYear.setOnValueChangedListener { numberPicker, i, i2 ->
+                binding.endYear.value = numberPicker.value
                 discoverUpdate(genreId)
             }
         }
@@ -139,10 +132,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun discoverUpdate(uuid: String) {
-        binding.startDate.isEnabled = true
-        binding.endDate.isEnabled=true
-        viewModel.setStartDate(binding.startDate.value.toString())
-        viewModel.setEndDate(binding.endDate.value.toString())
+        binding.startYear.isEnabled = true
+        binding.endYear.isEnabled=true
+        viewModel.setStartDate(binding.startYear.value.toString())
+        viewModel.setEndDate(binding.endYear.value.toString())
         genreId = uuid
         viewModel.setQuery(uuid)
         setRecyclerView()

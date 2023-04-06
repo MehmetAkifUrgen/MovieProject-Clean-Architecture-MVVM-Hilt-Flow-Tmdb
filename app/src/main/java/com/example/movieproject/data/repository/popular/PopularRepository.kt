@@ -16,4 +16,6 @@ interface PopularRepository {
 
 
     suspend fun getPopularDetails(id: String): Flow<PopularDetailsResponse>
+
+    suspend fun getRecommed(id: String,page: Int):PopularResponse
 }

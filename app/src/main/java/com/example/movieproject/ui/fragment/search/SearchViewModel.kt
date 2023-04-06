@@ -27,6 +27,9 @@ class SearchViewModel @Inject constructor(
 
 ) : ViewModel() {
 
+
+
+
     private val _searchAdapterList = MutableLiveData<ArrayList<PopularUiModel>>()
     val searchAdapterList : LiveData<ArrayList<PopularUiModel>> = _searchAdapterList
     private val _genredapterList = MutableLiveData<ArrayList<GenreUiModel>>()
@@ -63,21 +66,6 @@ class SearchViewModel @Inject constructor(
         endDate.postValue(s)
     }
 
-//    fun discover(discoverId:String){
-//        viewModelScope.launch {
-//            discoverUseCase.discoverId(discoverId)
-//            discoverUseCase.execute(
-//                onSuccess = {
-//                    popularsMapper.mapOnPopularsResponse(it)
-//                    _discoverAdapterList.postValue(popularsMapper.popularsAdapterList)
-//                },
-//                onError = {
-//                    it.printStackTrace()
-//                }
-//            )
-//        }
-//
-//    }
 
      fun genreRequest(){
          viewModelScope.launch {

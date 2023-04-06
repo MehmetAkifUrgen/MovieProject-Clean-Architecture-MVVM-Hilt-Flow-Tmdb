@@ -7,6 +7,7 @@ import com.example.movieproject.data.response.popular.PopularDetailsResponse
 import com.example.movieproject.data.response.popular.PopularResponse
 import com.example.movieproject.data.response.upcoming.UpComingResponse
 import com.example.movieproject.data.response.watch.WatchResponse
+import com.example.movieproject.data.response.watch.WatchResultResponse
 import com.example.movieproject.utils.Constants.api_key
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
@@ -17,6 +18,12 @@ interface ServiceInterface {
 
     @GET("movie/popular?api_key=$api_key&language=en-US")
     suspend fun getPopulars(@Query("page") page: Int): PopularResponse
+
+    @GET("movie/{movie_id}/watch/providers?api_key=$api_key")
+    suspend fun getProviders(@Path("movie_id") id: String) : WatchResponse
+
+    @GET("movie/{movie_id}/recommendations?api_key=$api_key")
+    suspend fun getRecommed(@Path("movie_id") id: String,@Query("page") page:Int) : PopularResponse
 
     @GET("movie/upcoming?api_key=$api_key&language=en-US")
     suspend fun getUpComing(@Query("page") page: Int): UpComingResponse

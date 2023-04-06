@@ -17,6 +17,8 @@
         android:id="@+id/fragment_movie_detail"
         android:name="com.example.movieproject.ui.fragment.populars.MovieDetailFragment"
         tools:layout="@layout/fragment_movie_detail" >
+        <action android:id="@+id/action_movieDetailFragment_to_movieDetailFragment"
+            app:destination="@+id/fragment_movie_detail"/>
 
         <argument
             android:name="id"

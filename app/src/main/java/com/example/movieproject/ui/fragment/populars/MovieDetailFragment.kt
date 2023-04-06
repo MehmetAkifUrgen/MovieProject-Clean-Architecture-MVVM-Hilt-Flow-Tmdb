@@ -2,22 +2,22 @@ package com.example.movieproject.ui.fragment.populars
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieproject.R
 import com.example.movieproject.base.BaseFragment
 import com.example.movieproject.data.uimodel.cast.CastDetailUiModel
 import com.example.movieproject.data.uimodel.cast.CrewDetailUiModel
 import com.example.movieproject.data.uimodel.populars.PopularDetailsUiModel
-import com.example.movieproject.data.uimodel.watch.WatchUiModel
 import com.example.movieproject.databinding.FragmentMovieDetailBinding
 import com.example.movieproject.ui.adapter.cast.CastAdapter
 import com.example.movieproject.ui.adapter.cast.CrewAdapter
-import com.example.movieproject.ui.adapter.watch.WatchAdapter
+import com.example.movieproject.ui.adapter.recommed.RecommedPagingAdapter
 import com.example.movieproject.ui.fragment.cast.CastViewModel
+import com.example.movieproject.ui.fragment.populars.MovieDetailFragmentDirections.Companion.actionMovieDetailFragmentToMovieDetailFragment
 import com.example.movieproject.ui.fragment.watch.WatchViewModel
 import com.example.movieproject.utils.Constants.imagePath
 import com.example.movieproject.utils.loadImage
@@ -27,12 +27,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
 
+    private val recommedPagingAdapter = RecommedPagingAdapter()
+
+
     private val viewModel: MovieDetailViewModel by viewModels()
     private val watchViewModel: WatchViewModel by viewModels()
     private val castViewModel: CastViewModel by viewModels()
     private var castAdapter: CastAdapter? = null
     private var crewAdapter: CrewAdapter? = null
-    private var providerAdapter: WatchAdapter? = null
     private val args: MovieDetailFragmentArgs by navArgs()
 
 
@@ -43,14 +45,50 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
         watchViewModel.watchRequest(args.id)
         viewModel.agentDetailRequest(args.id)
         castViewModel.castRequest(args.id)
+        viewModel.setMovieId(args.id)
 
         initAgentDetailItemObserve()
         initBackButtonClickListener()
+
+        setRecommedRecylerView()
+        RecommedObserve()
+        RecommedItemClick()
+
+
     }
+
 
     private fun initBackButtonClickListener() {
         binding.backButton.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun RecommedObserve() {
+        viewModel.recommedList.observe(viewLifecycleOwner) {
+            recommedPagingAdapter.submitData(lifecycle, it)
+        }
+
+
+    }
+
+    private fun RecommedItemClick() {
+        recommedPagingAdapter.onMovieClick {
+            findNavController().navigate(
+                MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieDetailFragment(
+                    it
+                )
+            )
+        }
+    }
+
+    private fun setRecommedRecylerView() {
+        binding.recommedRecylerView.apply {
+            adapter = recommedPagingAdapter
+            layoutManager = GridLayoutManager(
+                requireContext(), 1,
+                GridLayoutManager.HORIZONTAL, false
+            )
         }
     }
 
@@ -96,27 +134,22 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
 
     private fun initAgentDetailItemObserve() {
 
-       try {
-           viewModel.agentDetailItem.observe(viewLifecycleOwner) {
-               initUi(it)
-           }
-           castViewModel.castAdapterList.observe(viewLifecycleOwner) {
-               initCastAdapter(it)
-           }
-           castViewModel.director.observe(viewLifecycleOwner) {
-               crewUi(it)
-           }
-           castViewModel.crewAdapterList.observe(viewLifecycleOwner) {
-               initCrewdapter(it)
-           }
-           watchViewModel.pro.observe(viewLifecycleOwner) {
-               Log.d("klass", it.toString())
-               initProviderAdapter(it)
-           }
-       }
-       catch (e:Exception){
-           Toast.makeText(context,"$e",Toast.LENGTH_SHORT)
-       }
+        try {
+            viewModel.agentDetailItem.observe(viewLifecycleOwner) {
+                initUi(it)
+            }
+            castViewModel.castAdapterList.observe(viewLifecycleOwner) {
+                initCastAdapter(it)
+            }
+            castViewModel.director.observe(viewLifecycleOwner) {
+                crewUi(it)
+            }
+            castViewModel.crewAdapterList.observe(viewLifecycleOwner) {
+                initCrewdapter(it)
+            }
+        } catch (e: Exception) {
+            Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
@@ -134,15 +167,6 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
         crewItem.let {
             crewAdapter = CrewAdapter(it)
             binding.crewRecyclerView.adapter = crewAdapter
-
-        }
-    }
-
-    private fun initProviderAdapter(providerItem: ArrayList<WatchUiModel>) {
-
-        providerItem.let {
-            providerAdapter = WatchAdapter(it)
-            binding.providerRecylerView.adapter = providerAdapter
 
         }
     }

@@ -26,4 +26,8 @@ class PopularRepositoryImpl(private val serviceInterface: ServiceInterface) : Po
     override suspend fun getPopularDetails(id: String): Flow<PopularDetailsResponse> {
         return serviceInterface.getPopularDetails(id)
     }
+
+    override suspend fun getRecommed(id: String,page: Int): PopularResponse {
+        return serviceInterface.getRecommed(id, page)
+    }
 }
