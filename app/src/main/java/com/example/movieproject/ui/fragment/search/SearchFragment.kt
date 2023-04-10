@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.NumberPicker
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -45,10 +47,33 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         yearPicker()
         drawerLayout()
         discoverClick()
+        dropDown()
+
     }
 
+    private fun dropDown() {
+        val items = listOf("Öğe 1", "Öğe 2", "Öğe 3")
+        ArrayAdapter.createFromResource(
+            requireContext(),
+           initGenre(),
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            binding.genreSpinner.adapter = adapter
+        }
+        binding.genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                // Seçilen öğeyle yapılacak işlemler
+            }
 
-
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Hiçbir şey seçilmediğinde yapılacak işlemler
+            }
+        }
+    }
 
 
     private fun yearPicker() {
@@ -171,7 +196,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun initGenre() {
         viewModel.genreAdapterList.observe(viewLifecycleOwner) {
-            initGenreAdapter(it)
+            return@observe
         }
     }
 

@@ -9,11 +9,7 @@
     </data>
 
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/my_drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/blue">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,13 +21,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/my_drawer_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8sp"
-                    android:src="@drawable/ic_baseline_menu_24" />
 
                 <EditText
                     android:id="@+id/search_view"
@@ -54,6 +43,10 @@
               android:gravity="center"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
+              <Spinner
+                  android:id="@+id/genre_spinner"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content" />
 
 
               <NumberPicker
@@ -95,17 +88,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="start">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/genre_recycler_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/genre_item" />
-
         </com.google.android.material.navigation.NavigationView>
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+
 
 
 
