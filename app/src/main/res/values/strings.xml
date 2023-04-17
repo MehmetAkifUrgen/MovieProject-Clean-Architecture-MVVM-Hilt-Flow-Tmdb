@@ -1,22 +1,7 @@
 <resources>
     <string name="app_name">MovieProject</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="agents">Agents</string>
-    <string name="maps">Maps</string>
-    <string name="weapons">Weapons</string>
-    <string name="tiers">Tiers</string>
-    <string name="description">Description</string>
-    <string name="special_abilities">Cast</string>
-    <string name="damage_range">Damage Range</string>
-    <string name="skins">Skins</string>
-
-    <string name="head_damage">Head - %.1f</string>
-    <string name="body_damage">Body - %1d</string>
-    <string name="leg_damage">Body - %.1f</string>
     <string name="rating">rating</string>
-    <string name="what_is_lorem_ipsum_lorem_ipsum_is_simply_dummy_text_of_the_printing_and_typesetting_industry_lorem_ipsum_has_been_the_industry_s_standard_dummy_text_ever_since_the_1500s_when_an_unknown_printer_took_a_galley_of_type_and_scrambled_it_to_make_a_type_specimen_book_it_has_survived_not_only_five_centuries_but_also_the_leap_into_electronic_typesetting_remaining_essentially_unchanged_it_was_popularised_in_the_1960s_with_the_release_of_letraset_sheets_containing_lorem_ipsum_passages_and_more_recently_with_desktop_publishing_software_like_aldus_pagemaker_including_versions_of_lorem_ipsum">What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="trailer">TRAILER</string>
     <string name="add">add</string>
     <string name="cast">CAST</string>
@@ -27,5 +12,8 @@
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
     <string name="select_year">Select Year</string>
+    <string name="welcome_to_myapp">Welcome to MyApp</string>
+    <string name="web_client_id">711957072209-p3omnka5n3qeesjpc8a341qrha224hjo.apps.googleusercontent.com</string>
+
 
 </resources>

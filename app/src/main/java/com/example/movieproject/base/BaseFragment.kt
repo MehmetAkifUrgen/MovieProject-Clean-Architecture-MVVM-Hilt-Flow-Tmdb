@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
 
+
     lateinit var binding: VDB
 
     override fun onCreateView(

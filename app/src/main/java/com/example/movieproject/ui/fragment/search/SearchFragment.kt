@@ -1,13 +1,12 @@
 package com.example.movieproject.ui.fragment.search
 
-import android.annotation.SuppressLint
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.NumberPicker
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
@@ -24,20 +23,13 @@ import com.example.movieproject.ui.fragment.populars.MovieFragmentDirections
 import com.google.android.flexbox.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
-
-    lateinit var drawerLayout: DrawerLayout
-
-
-
     private var searchAdapter: SearchMovieAdapter? = null
     private val discoverAdapter = DiscoverPagingAdapter()
-    private var genreAdapter: GenreAdapter? = null
     private val viewModel: SearchViewModel by viewModels()
-    var genreId:String=""
+    var genreId: String = ""
 
     override fun getLayoutId(): Int = R.layout.fragment_search
     override fun prepareView(savedInstanceState: Bundle?) {
@@ -45,47 +37,50 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         viewModel.genreRequest()
         initGenre()
         yearPicker()
-        drawerLayout()
         discoverClick()
-        dropDown()
 
     }
 
-    private fun dropDown() {
-        val items = listOf("Öğe 1", "Öğe 2", "Öğe 3")
-        ArrayAdapter.createFromResource(
-            requireContext(),
-           initGenre(),
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            binding.genreSpinner.adapter = adapter
-        }
+    private fun dropDown(data: ArrayList<GenreUiModel>) {
+
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, data.map {
+                it.name
+            })
+        binding.genreSpinner.adapter = adapter
         binding.genreSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                // Seçilen öğeyle yapılacak işlemler
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                i: Int,
+                l: Long
+            ) {
+                val selectedGenre: String? = data[i].id
+                if (selectedGenre != null) {
+                    discoverUpdate(selectedGenre)
+                }
+                // Seçilen şehirle ilgili işlemleri burada yapabilirsiniz
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Hiçbir şey seçilmediğinde yapılacak işlemler
-            }
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
     }
 
 
     private fun yearPicker() {
         binding.apply {
+
             startYear.minValue = 1900
-            startYear.maxValue = 2100
+            startYear.maxValue = 2023
+            startYear.value = 2010
             startYear.setOnValueChangedListener { numberPicker, i, i2 ->
                 binding.startYear.value = numberPicker.value
+                discoverUpdate(genreId)
             }
 
             endYear.minValue = 1901
-            endYear.maxValue = 2100
+            endYear.maxValue = 2025
+            endYear.value = 2023
             endYear.setOnValueChangedListener { numberPicker, i, i2 ->
                 binding.endYear.value = numberPicker.value
                 discoverUpdate(genreId)
@@ -106,18 +101,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         })
     }
 
-    private fun drawerLayout() {
-        drawerLayout = binding.myDrawerLayout
-        binding.myDrawerButton.setOnClickListener {
-            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-            } else {
-                drawerLayout.openDrawer(GravityCompat.START);
-
-            }
-        }
-    }
 
     private fun initAdapter() {
         viewModel.searchAdapterList.value?.let { adapterList ->
@@ -143,22 +126,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
 
-
-    private fun initGenreAdapter(genreUiModels: ArrayList<GenreUiModel>) {
-        genreUiModels.let { adapterList ->
-            genreAdapter = GenreAdapter(adapterList, itemClick = {
-                it.id?.let { uuid ->
-                    discoverUpdate(uuid)
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                }
-            })
-            binding.genreRecyclerView.adapter = genreAdapter
-        }
-    }
-
     private fun discoverUpdate(uuid: String) {
         binding.startYear.isEnabled = true
-        binding.endYear.isEnabled=true
+        binding.endYear.isEnabled = true
         viewModel.setStartDate(binding.startYear.value.toString())
         viewModel.setEndDate(binding.endYear.value.toString())
         genreId = uuid
@@ -196,7 +166,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun initGenre() {
         viewModel.genreAdapterList.observe(viewLifecycleOwner) {
-            return@observe
+            dropDown(it)
         }
     }
 
