@@ -9,6 +9,13 @@
         android:id="@+id/nav_search"
         android:icon="@drawable/ic_baseline_search_24"
         android:title="@string/search" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/baseline_manage_accounts"
+        android:title="@string/profile" />
+    <item android:id="@+id/nav_watchlist"
+        android:icon="@drawable/baseline_playlist_add_circle"
+        android:title="@string/watchlist" />
 
 
 

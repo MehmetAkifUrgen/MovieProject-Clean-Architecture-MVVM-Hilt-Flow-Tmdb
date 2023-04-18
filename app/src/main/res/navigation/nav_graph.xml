@@ -6,6 +6,8 @@
 
     <include app:graph="@navigation/nav_movie" />
     <include app:graph="@navigation/nav_search" />
+    <include app:graph="@navigation/nav_auth" />
+    <include app:graph="@navigation/nav_watchlist"/>
 
 
 </navigation>

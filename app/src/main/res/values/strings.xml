@@ -14,6 +14,8 @@
     <string name="select_year">Select Year</string>
     <string name="welcome_to_myapp">Welcome to MyApp</string>
     <string name="web_client_id">711957072209-p3omnka5n3qeesjpc8a341qrha224hjo.apps.googleusercontent.com</string>
+    <string name="profile">Profile</string>
+    <string name="watchlist">Watchlist</string>
 
 
 </resources>

@@ -36,6 +36,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 R.id.searchFragment -> {
                     binding.bottomNavigationView.setVisible()
                 }
+                R.id.profileFragment -> {
+                    binding.bottomNavigationView.setVisible()
+                }
+                R.id.watchlistfragment -> {
+                    binding.bottomNavigationView.setVisible()
+                }
 
                 else -> {
                     binding.bottomNavigationView.setGone()

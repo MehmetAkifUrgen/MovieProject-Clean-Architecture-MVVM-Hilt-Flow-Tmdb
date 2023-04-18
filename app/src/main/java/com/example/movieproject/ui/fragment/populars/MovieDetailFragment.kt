@@ -2,6 +2,7 @@ package com.example.movieproject.ui.fragment.populars
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import com.example.movieproject.base.BaseFragment
 import com.example.movieproject.data.uimodel.cast.CastDetailUiModel
 import com.example.movieproject.data.uimodel.cast.CrewDetailUiModel
 import com.example.movieproject.data.uimodel.populars.PopularDetailsUiModel
+import com.example.movieproject.data.uimodel.populars.PopularUiModel
 import com.example.movieproject.databinding.FragmentMovieDetailBinding
 import com.example.movieproject.ui.adapter.cast.CastAdapter
 import com.example.movieproject.ui.adapter.cast.CrewAdapter
@@ -21,6 +23,10 @@ import com.example.movieproject.ui.fragment.populars.MovieDetailFragmentDirectio
 import com.example.movieproject.ui.fragment.watch.WatchViewModel
 import com.example.movieproject.utils.Constants.imagePath
 import com.example.movieproject.utils.loadImage
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -28,6 +34,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
 
     private val recommedPagingAdapter = RecommedPagingAdapter()
+    val db = Firebase.firestore
+    private lateinit var auth: FirebaseAuth
+    private lateinit var thisMovie: PopularDetailsUiModel
+
+
 
 
     private val viewModel: MovieDetailViewModel by viewModels()
@@ -42,6 +53,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
 
 
     override fun prepareView(savedInstanceState: Bundle?) {
+
         watchViewModel.watchRequest(args.id)
         viewModel.agentDetailRequest(args.id)
         castViewModel.castRequest(args.id)
@@ -53,8 +65,15 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
         setRecommedRecylerView()
         RecommedObserve()
         RecommedItemClick()
+        addWatchList()
 
 
+    }
+
+    private fun addWatchList() {
+        binding.add.setOnClickListener {
+            watchList()
+        }
     }
 
 
@@ -70,6 +89,21 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
         }
 
 
+    }
+
+    private fun watchList(){
+        auth=Firebase.auth
+        val user= auth.currentUser?.uid
+        if (user != null) {
+            db.collection(user)
+                .add(PopularUiModel(thisMovie.title,thisMovie.poster_path,thisMovie.id))
+                .addOnSuccessListener { documentReference ->
+                    Log.d("tag", "DocumentSnapshot added with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w("tag", "Error adding document", e)
+                }
+        }
     }
 
     private fun RecommedItemClick() {
@@ -137,6 +171,8 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>() {
         try {
             viewModel.agentDetailItem.observe(viewLifecycleOwner) {
                 initUi(it)
+                thisMovie = it
+
             }
             castViewModel.castAdapterList.observe(viewLifecycleOwner) {
                 initCastAdapter(it)
