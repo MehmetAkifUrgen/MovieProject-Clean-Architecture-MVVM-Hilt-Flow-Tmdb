@@ -7,6 +7,18 @@
     <fragment
         android:id="@+id/watchlistfragment"
         android:name="com.example.movieproject.ui.fragment.watchList.WatchListFragment">
+        <action
+            android:id="@+id/action_movieFragment_to_movieDetailFragment"
+            app:destination="@id/fragment_movie_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_movie_detail"
+        android:name="com.example.movieproject.ui.fragment.populars.MovieDetailFragment">
+
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
 
 </navigation>

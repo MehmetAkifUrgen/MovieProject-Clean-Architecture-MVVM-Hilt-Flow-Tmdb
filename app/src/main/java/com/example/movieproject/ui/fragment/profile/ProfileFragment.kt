@@ -18,7 +18,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun prepareView(savedInstanceState: Bundle?) {
         auth=Firebase.auth
-       CoroutineScope(Dispatchers.IO).launch{
+       CoroutineScope(Dispatchers.Main).launch{
            binding.profileImage.loadImage(auth.currentUser?.photoUrl.toString())
        }
 

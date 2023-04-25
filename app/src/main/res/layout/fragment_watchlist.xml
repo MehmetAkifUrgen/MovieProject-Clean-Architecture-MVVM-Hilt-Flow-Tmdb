@@ -10,10 +10,17 @@
         >
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/watchListRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/watchlist_recylerview"
-            />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="8sp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:ignore="RtlSymmetry"
+            tools:listitem="@layout/item_movie_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
